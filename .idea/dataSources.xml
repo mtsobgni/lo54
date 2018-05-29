@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Formation" uuid="8de982ae-710c-444b-89ad-6d946cbbaa5c">
+    <data-source source="LOCAL" name="NewFormation" uuid="8cee3c8e-3bbb-410f-a246-67d7d7dfd21e">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/Formation</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="MaBase" uuid="54b2c170-aed8-45b2-a074-2d0d367ed28d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
   </component>
 </project>

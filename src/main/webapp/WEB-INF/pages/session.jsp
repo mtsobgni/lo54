@@ -46,7 +46,7 @@
         <br>
         <br>
         <!--  <div  > -->
-        <h2> <%= request.getAttribute("title")%></h2>
+        <h2> <%= request.getAttribute("titre")%></h2>
 
         <%List<CourseSession> lst;
             lst = (List<CourseSession>) request.getAttribute("listSession");
@@ -103,7 +103,11 @@
             }
 
         </style>
-        <% if(lst.isEmpty()){
+        <% if(lst.isEmpty()){ %>
+        <div>
+            <h2>Aucun résultat pour la recherche demander</h2>
+        </div>
+        <%
 
         }
         else {

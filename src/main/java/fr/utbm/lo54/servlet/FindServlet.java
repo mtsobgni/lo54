@@ -27,8 +27,8 @@ public class FindServlet extends HttpServlet {
         String keyword = (String) request.getParameter("val");
         List<Course> result;
         ListeFormation sv1= new ListeFormation();
-        result=sv1.listeCourse();
-        request.setAttribute( "list", result );
+       // result=sv1.listeCourse();
+       // request.setAttribute( "list", result );
          this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/find.jsp"
           ).forward( request, response );
 

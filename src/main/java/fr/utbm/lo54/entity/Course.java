@@ -4,6 +4,8 @@ package fr.utbm.lo54.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="course")
 public class Course {
@@ -13,6 +15,8 @@ public class Course {
 
     @Column(name="title")
     private String title;
+
+   // private Set<CourseSession> CourseSessions = new HashSet<>(0);
 
     public Course(String code, String title) {
         this.code = code;

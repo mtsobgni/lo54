@@ -22,17 +22,17 @@ public class FindServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/formation.jsp"
-        //  ).forward( request, response );
+       // this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/formation.jsp"
+      //  ).forward( request, response );
         String keyword = (String) request.getParameter("val");
         List<Course> result;
-        ListeFormation sv1 = new ListeFormation();
-        result = sv1.listeCourse();
-        request.setAttribute("list", result);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/find.jsp"
-        ).forward(request, response);
+        ListeFormation sv1= new ListeFormation();
+       // result=sv1.listeCourse();
+       // request.setAttribute( "list", result );
+         this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/find.jsp"
+          ).forward( request, response );
 
-        // response.setContentType("text/plain");
+       // response.setContentType("text/plain");
         //response.getWriter().write(keyword);
     }
 }

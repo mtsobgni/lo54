@@ -47,7 +47,7 @@ public class ServletFormation extends HttpServlet {
         ListeFormation sv1= new ListeFormation();
         long millis=System.currentTimeMillis();
         Date date1 = new Date(millis);
-        result=sv1.filtreCourse(search, lieu, date1);
+        result=sv1.filtreCourse(search, lieu);
         request.setAttribute( "list", result );
         List<Location> resultat;
         ListeFormation sv2= new ListeFormation();

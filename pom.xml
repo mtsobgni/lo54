@@ -63,21 +63,21 @@
         <version>1.2.17</version>
     </dependency>
 
-  <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-  <dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-all</artifactId>
-    <version>1.9.5</version>
-    <scope>test</scope>
-  </dependency>
+  <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.mockito/mockito-all &ndash;&gt;-->
+  <!--<dependency>-->
+    <!--<groupId>org.mockito</groupId>-->
+    <!--<artifactId>mockito-all</artifactId>-->
+    <!--<version>1.9.5</version>-->
+    <!--<scope>test</scope>-->
+  <!--</dependency>-->
 
-  <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-  <dependency>
-    <groupId>org.assertj</groupId>
-    <artifactId>assertj-core</artifactId>
-    <version>3.8.0</version>
-    <scope>test</scope>
-  </dependency>
+  <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.assertj/assertj-core &ndash;&gt;-->
+  <!--<dependency>-->
+    <!--<groupId>org.assertj</groupId>-->
+    <!--<artifactId>assertj-core</artifactId>-->
+    <!--<version>3.8.0</version>-->
+    <!--<scope>test</scope>-->
+  <!--</dependency>-->
 
   <dependency>
       <groupId>javassist</groupId>

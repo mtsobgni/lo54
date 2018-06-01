@@ -4,7 +4,7 @@
     border-width: 1px;   /* Epaisseur de la bordure  */
     border-color: #dddddd;   /* Couleur de la bordure  */
     padding: 10px 10px 10px 10px;   /* Espace entre les bords et le contenu : haut droite bas gauche  */
-            }
+}
 
 /* Champ de saisie */
 #searchthis #search {

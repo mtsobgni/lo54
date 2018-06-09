@@ -10,6 +10,8 @@ import fr.utbm.lo54.repository.CourseSessionDao;
 import fr.utbm.lo54.repository.LocationDao;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -94,38 +96,42 @@ public class Seed {
         CourseSessionDao CourseSessionDao = new CourseSessionDao();
         LocationDao locationDao = new LocationDao();
         CourseDao courseDao = new CourseDao();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy");
 
-
-        listCourseSession.add(new CourseSession(1, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(1), courseDao.findCourse("LO54")));
-        listCourseSession.add(new CourseSession(2, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(2), courseDao.findCourse("EV02")));
-        listCourseSession.add(new CourseSession(3, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(3), courseDao.findCourse("GE08")));
-        listCourseSession.add(new CourseSession(4, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(1), courseDao.findCourse("GL51")));
-        listCourseSession.add(new CourseSession(5, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(2), courseDao.findCourse("GL52")));
-        listCourseSession.add(new CourseSession(6, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(3), courseDao.findCourse("TX52")));
-        listCourseSession.add(new CourseSession(7, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(1), courseDao.findCourse("BD50")));
-        listCourseSession.add(new CourseSession(8, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(2), courseDao.findCourse("RE51")));
-        listCourseSession.add(new CourseSession(9, new Date(2018, 2, 27),
-                new Date(2018, 7, 1), 30, locationDao.findLocation(3), courseDao.findCourse("LE08")));
-        listCourseSession.add(new CourseSession(10, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(1), courseDao.findCourse("SQ40")));
-        listCourseSession.add(new CourseSession(11, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(2), courseDao.findCourse("LO54")));
-        listCourseSession.add(new CourseSession(12, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(3), courseDao.findCourse("EV02")));
-        listCourseSession.add(new CourseSession(13, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(1), courseDao.findCourse("GE08")));
-        listCourseSession.add(new CourseSession(14, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(2), courseDao.findCourse("GL51")));
-        listCourseSession.add(new CourseSession(15, new Date(2018, 9, 1),
-                new Date(2019, 2, 8), 30, locationDao.findLocation(3), courseDao.findCourse("GL52")));
+        try {
+            listCourseSession.add(new CourseSession(1, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("LO54")));
+            listCourseSession.add(new CourseSession(2, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("EV02")));
+            listCourseSession.add(new CourseSession(3, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("GE08")));
+            listCourseSession.add(new CourseSession(4, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("GL51")));
+            listCourseSession.add(new CourseSession(5, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("GL52")));
+            listCourseSession.add(new CourseSession(6, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("TX52")));
+            listCourseSession.add(new CourseSession(7, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("BD50")));
+            listCourseSession.add(new CourseSession(8, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("RE51")));
+            listCourseSession.add(new CourseSession(9, new Date(dateFormat.parse("27-02-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("LE08")));
+            listCourseSession.add(new CourseSession(10, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("SQ40")));
+            listCourseSession.add(new CourseSession(11, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("LO54")));
+            listCourseSession.add(new CourseSession(12, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("EV02")));
+            listCourseSession.add(new CourseSession(13, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("GE08")));
+            listCourseSession.add(new CourseSession(14, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("GL51")));
+            listCourseSession.add(new CourseSession(15, new Date(dateFormat.parse("01-09-2018").getTime()),
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("GL52")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         ListIterator<CourseSession> itrCourseSession = listCourseSession.listIterator();
         while (itrCourseSession.hasNext()) {

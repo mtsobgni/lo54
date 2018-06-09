@@ -2,9 +2,6 @@ package fr.utbm.lo54.servlet;
 
 import fr.utbm.lo54.entity.Course;
 import fr.utbm.lo54.service.ListeFormation;
-import fr.utbm.lo54.tools.HibernateUtil;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,17 +19,11 @@ public class FindServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-       // this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/formation.jsp"
-      //  ).forward( request, response );
         String keyword = (String) request.getParameter("val");
         List<Course> result;
-        ListeFormation sv1= new ListeFormation();
-       // result=sv1.listeCourse();
-       // request.setAttribute( "list", result );
-         this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/find.jsp"
-          ).forward( request, response );
+        ListeFormation sv1 = new ListeFormation();
 
-       // response.setContentType("text/plain");
-        //response.getWriter().write(keyword);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/find.jsp"
+        ).forward(request, response);
     }
 }

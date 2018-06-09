@@ -29,7 +29,7 @@ public class CourseSession implements Serializable {
     @JoinColumn(name = "code")
     private Course code;
 
-    public CourseSession(int idSession, Date startDate, Date endDate, int max, int i, String lo54) {
+    public CourseSession() {
     }
 
     public CourseSession(int idSession, Date startDate, Date endDate, int max, Location id, Course code) {

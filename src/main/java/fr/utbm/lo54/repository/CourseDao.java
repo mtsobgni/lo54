@@ -6,9 +6,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public class CourseDao {
 
-    // to insert a course with a course object
+    // insert a course with a course object
     public void save(Course course) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -25,7 +27,26 @@ public class CourseDao {
         }
     }
 
-    // to find a course by code
+    // list all the courses
+    public List<Course> getAllCourse() {
+        List<Course> courseList = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            Query query = session.createQuery("from course c");
+            courseList = query.list();
+
+//            ListIterator<Course> li = courseList.listIterator();
+//            while (li.hasNext()) {
+//                System.out.println(li.next().getCode().getTitle());
+//            }
+        }   catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return courseList;
+    }
+
+    // find a course by code
     public Course getCourse(String code) {
         Course course = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

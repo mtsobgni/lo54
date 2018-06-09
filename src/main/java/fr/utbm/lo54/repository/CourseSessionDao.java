@@ -10,13 +10,13 @@ import java.util.List;
 
 public class CourseSessionDao {
 
-    // to list all the course_session
+    // list all the course_session
     public List<CourseSession> getAllCourseSessions() {
         List<CourseSession> courseSessionList = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
-            Query query = session.createQuery("  from  course_session c");
+            Query query = session.createQuery("from course_session c");
             courseSessionList = query.list();
 
 //            ListIterator<CourseSession> li = courseSessionList.listIterator();
@@ -29,21 +29,7 @@ public class CourseSessionDao {
         return courseSessionList;
     }
 
-    // to list the course_session after filter
-    public List<CourseSession> getCourseSessionByFilter(String keyWord, String date, String location ) {
-        List<CourseSession> courseSessionList = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        try {
-
-        }   catch (HibernateException he) {
-            he.printStackTrace();
-        }
-
-        return courseSessionList;
-    }
-
-    // to insert a course with a course object
+    // insert a course with a course object
     public void save(CourseSession courseSession) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -63,5 +49,42 @@ public class CourseSessionDao {
             session.getTransaction().commit();
             session.close();
         }
+    }
+
+    // list the course after filter
+    public List<CourseSession> getCourseSessionByFilter(String keyWord, String locationId, String date) {
+        List<CourseSession> courseSessionList = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            String queryVar = generateFilterQuery(keyWord, locationId, date);
+            Query query = session.createQuery(queryVar);
+            if (!keyWord.isEmpty()) {
+                query.setParameter("keyWord", keyWord);
+            }
+            if (!locationId.isEmpty()) {
+                query.setParameter("locationId", locationId);
+            }
+            courseSessionList = query.list();
+        }   catch (HibernateException he) {
+            he.printStackTrace();
+        }
+
+        return courseSessionList;
+    }
+
+    // generate the query by keyword locationId and date
+    private String generateFilterQuery(String keyWord, String locationId, String date) {
+        String queryVar = "from course c where true";
+        if (!keyWord.isEmpty()) {
+            queryVar += "and c.code.title like :keyWord";
+        }
+        if (!locationId.isEmpty()) {
+            queryVar += "and c.id = :locationId";
+        }
+//        if (!date.isEmpty()) {
+//            queryVar += "and c.startDate between :startDate and :endDate";
+//        }
+        return queryVar;
     }
 }

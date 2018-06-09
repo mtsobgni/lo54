@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LocationDao {
 
-    // to list all the locations
+    // list all the locations
     public List<Location> getAllLocations() {
         List<Location> LocationList = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -28,7 +28,7 @@ public class LocationDao {
         return LocationList;
     }
 
-    // to find a location by id
+    // find a location by id
     public Location getLocation(int id) {
         Location location = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -42,7 +42,7 @@ public class LocationDao {
         return location;
     }
 
-    // to insert a location with a location object
+    // insert a location with a location object
     public void save(Location location) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

@@ -13,9 +13,9 @@ public class ClientDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            Query query = session.createSQLQuery("insert into client (id_client, lastname, firstname, address, phone, email) " +
-                                                    "values (:id_client, :lastname, :firstname, :address, :phone, :email)");
-            query.setParameter("id_client", client.getIdClient());
+            Query query = session.createSQLQuery("insert into client (idClient, lastname, firstname, address, phone, email) " +
+                                                    "values (:idClient, :lastname, :firstname, :address, :phone, :email)");
+            query.setParameter("idClient", client.getIdClient());
             query.setParameter("lastname", client.getLastname());
             query.setParameter("firstname", client.getFirstname());
             query.setParameter("address", client.getAddress());

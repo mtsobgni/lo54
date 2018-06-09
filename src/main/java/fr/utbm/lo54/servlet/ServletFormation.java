@@ -18,8 +18,7 @@ import java.util.List;
 @WebServlet(name = "Formation", urlPatterns = {"/formation"})
 public class ServletFormation extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //  request.setAttribute( "test", message );
         List<Course> result;
         ListeFormation sv1 = new ListeFormation();
@@ -29,12 +28,10 @@ public class ServletFormation extends HttpServlet {
         ListeFormation sv2 = new ListeFormation();
         resultat = sv2.listLocation();
         request.setAttribute("liste", resultat);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/formation.jsp"
-        ).forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/formation.jsp").forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // request.setAttribute( "test", message );
         String search = (String) request.getParameter("s");
         String lieu = (String) request.getParameter("lieu");
@@ -53,7 +50,6 @@ public class ServletFormation extends HttpServlet {
         ListeFormation sv2 = new ListeFormation();
         resultat = sv2.listLocation();
         request.setAttribute("liste", resultat);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/formation.jsp"
-        ).forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/formation.jsp").forward(request, response);
     }
 }

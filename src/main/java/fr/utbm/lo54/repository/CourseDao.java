@@ -10,6 +10,21 @@ import java.util.List;
 
 public class CourseDao {
 
+
+    // find a course by code
+    public Course getCourse(String code) {
+        Course course = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("from course c where c.code = :code");
+            query.setParameter("code", code);
+            course = (Course) query.list().get(0);
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return course;
+    }
+
     // insert a course with a course object
     public void save(Course course) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -35,29 +50,10 @@ public class CourseDao {
         try {
             Query query = session.createQuery("from course c");
             courseList = query.list();
-
-//            ListIterator<Course> li = courseList.listIterator();
-//            while (li.hasNext()) {
-//                System.out.println(li.next().getCode().getTitle());
-//            }
         }   catch (HibernateException he) {
             he.printStackTrace();
         }
         return courseList;
-    }
-
-    // find a course by code
-    public Course getCourse(String code) {
-        Course course = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            Query query = session.createQuery("from course c where c.code = :code");
-            query.setParameter("code", code);
-            course = (Course) query.list().get(0);
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-        return course;
     }
 
 }

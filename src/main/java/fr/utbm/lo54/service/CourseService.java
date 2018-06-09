@@ -7,14 +7,15 @@ import java.util.List;
 
 public class CourseService {
 
-    public CourseService() {
-
-    };
-
-    public List<Course> listAllCourse() {
-        List<Course> listCourse = null;
+    public Course getCourse(String code) {
         CourseDao courseDao = new CourseDao();
-        listCourse = courseDao.getAllCourse();
+        Course course = courseDao.getCourse(code);
+        return course;
+    }
+
+    public List<Course> listAllCourses() {
+        CourseDao courseDao = new CourseDao();
+        List<Course> listCourse = courseDao.getAllCourse();
         return listCourse;
     };
 

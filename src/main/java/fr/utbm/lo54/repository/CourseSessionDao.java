@@ -10,19 +10,27 @@ import java.util.List;
 
 public class CourseSessionDao {
 
+    // get course session by id_session
+    public  CourseSession getCourseSession(int id) {
+        CourseSession courseSession = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("from course_session c where c.idSession = :idSession");
+            query.setParameter("idSession", id);
+            courseSession = (CourseSession) query.list().get(0);
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return courseSession;
+    }
+
     // list all the course_session
     public List<CourseSession> getAllCourseSessions() {
         List<CourseSession> courseSessionList = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-
         try {
             Query query = session.createQuery("from course_session c");
             courseSessionList = query.list();
-
-//            ListIterator<CourseSession> li = courseSessionList.listIterator();
-//            while (li.hasNext()) {
-//                System.out.println(li.next().getCode().getTitle());
-//            }
         }   catch (HibernateException he) {
             he.printStackTrace();
         }
@@ -34,11 +42,11 @@ public class CourseSessionDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            Query query = session.createSQLQuery("insert into course_session (id_session, start_date, end_date, max, id, code)" +
-                                                    " values (:id_session, :start_date, :end_date, :max, :id, :code)");
-            query.setParameter("id_session", courseSession.getIdSession());
-            query.setTimestamp("start_date", courseSession.getStartDate());
-            query.setTimestamp("end_date", courseSession.getEndDate());
+            Query query = session.createSQLQuery("insert into course_session (idSession, startDate, endDate, max, id, code)" +
+                                                    " values (:idSession, :startDate, :endDate, :max, :id, :code)");
+            query.setParameter("idSession", courseSession.getIdSession());
+            query.setTimestamp("startDate", courseSession.getStartDate());
+            query.setTimestamp("endDate", courseSession.getEndDate());
             query.setParameter("max", courseSession.getMax());
             query.setParameter("id", courseSession.getId());
             query.setParameter("code", courseSession.getCode());

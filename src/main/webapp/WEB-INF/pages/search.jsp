@@ -15,7 +15,7 @@
 <html>
 <head>
 
-    <jsp:include page="enTete.jsp" />
+    <jsp:include page="head.jsp" />
     <title>Search</title>
 </head>
 <body class="home">

@@ -17,6 +17,10 @@ public class Location implements Serializable {
     public Location() {
     }
 
+    public Location(String city) {
+        this.city = city;
+    }
+
     public Location(int id, String city) {
         this.id = id;
         this.city = city;
@@ -36,6 +40,14 @@ public class Location implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                '}';
     }
 
     @Override

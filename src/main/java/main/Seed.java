@@ -39,7 +39,7 @@ public class Seed {
         ListIterator<Location> itrLocation = listLocation.listIterator();
         while (itrLocation.hasNext()) {
             Location location = itrLocation.next();
-            locationDao.registerLocation(location);
+            locationDao.save(location);
             System.out.println(location.toString());
         }
     }
@@ -51,7 +51,7 @@ public class Seed {
         ClientDao clientDao = new ClientDao();
 
         listClient.add(new Client(1,"Wei", "Maxime", "1 rue Gastion Defferre", 600000001, "maxime.wei@utbm.fr"));
-        listClient.add(new Client(2,"Huang", "Michel", "1 rue Gastion Defferre", 600000002, "michel.huang@utbm.fr"));
+        listClient.add(new Client(2,"Liu", "Michel", "1 rue Gastion Defferre", 600000002, "michel.liu@utbm.fr"));
         listClient.add(new Client(3,"Gou", "Louis", "1 rue Gastion Defferre", 600000003, "louis.gou@utbm.fr"));
         listClient.add(new Client(4,"Theo", "Liang", "1 rue Gastion Defferre", 600000004, "liang.theo@utbm.fr"));
         listClient.add(new Client(5,"Du", "Pierre", "1 rue Gastion Defferre", 600000005, "pierre.du@utbm.fr"));
@@ -59,7 +59,7 @@ public class Seed {
         ListIterator<Client> itrClient = listClient.listIterator();
         while (itrClient.hasNext()) {
             Client client = itrClient.next();
-            clientDao.registerClient(client);
+            clientDao.save(client);
             System.out.println(client.toString());
         }
     }
@@ -84,7 +84,7 @@ public class Seed {
         ListIterator<Course> itrCourse = listCourse.listIterator();
         while (itrCourse.hasNext()) {
             Course course = itrCourse.next();
-            courseDao.registerCourse(course);
+            courseDao.save(course);
             System.out.println(course.toString());
         }
     }
@@ -100,35 +100,35 @@ public class Seed {
 
         try {
             listCourseSession.add(new CourseSession(1, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("LO54")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(1), courseDao.getCourse("LO54")));
             listCourseSession.add(new CourseSession(2, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("EV02")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(2), courseDao.getCourse("EV02")));
             listCourseSession.add(new CourseSession(3, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("GE08")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(3), courseDao.getCourse("GE08")));
             listCourseSession.add(new CourseSession(4, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("GL51")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(1), courseDao.getCourse("GL51")));
             listCourseSession.add(new CourseSession(5, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("GL52")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(2), courseDao.getCourse("GL52")));
             listCourseSession.add(new CourseSession(6, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("TX52")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(3), courseDao.getCourse("TX52")));
             listCourseSession.add(new CourseSession(7, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("BD50")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(1), courseDao.getCourse("BD50")));
             listCourseSession.add(new CourseSession(8, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("RE51")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(2), courseDao.getCourse("RE51")));
             listCourseSession.add(new CourseSession(9, new Date(dateFormat.parse("27-02-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("LE08")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(3), courseDao.getCourse("LE08")));
             listCourseSession.add(new CourseSession(10, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("SQ40")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(1), courseDao.getCourse("SQ40")));
             listCourseSession.add(new CourseSession(11, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("LO54")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(2), courseDao.getCourse("LO54")));
             listCourseSession.add(new CourseSession(12, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("EV02")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(3), courseDao.getCourse("EV02")));
             listCourseSession.add(new CourseSession(13, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(1), courseDao.findCourse("GE08")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(1), courseDao.getCourse("GE08")));
             listCourseSession.add(new CourseSession(14, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(2), courseDao.findCourse("GL51")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(2), courseDao.getCourse("GL51")));
             listCourseSession.add(new CourseSession(15, new Date(dateFormat.parse("01-09-2018").getTime()),
-                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.findLocation(3), courseDao.findCourse("GL52")));
+                    new Date(dateFormat.parse("01-07-2018").getTime()), 30, locationDao.getLocation(3), courseDao.getCourse("GL52")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -136,7 +136,7 @@ public class Seed {
         ListIterator<CourseSession> itrCourseSession = listCourseSession.listIterator();
         while (itrCourseSession.hasNext()) {
             CourseSession courseSession = itrCourseSession.next();
-            CourseSessionDao.registerCourseSession(courseSession);
+            CourseSessionDao.save(courseSession);
             System.out.println(courseSession.toString());
         }
     }

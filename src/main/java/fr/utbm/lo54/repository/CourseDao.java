@@ -9,7 +9,7 @@ import org.hibernate.Session;
 public class CourseDao {
 
     // to insert a course with a course object
-    public void registerCourse(Course course) {
+    public void save(Course course) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
@@ -26,7 +26,7 @@ public class CourseDao {
     }
 
     // to find a course by code
-    public Course findCourse(String code) {
+    public Course getCourse(String code) {
         Course course = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

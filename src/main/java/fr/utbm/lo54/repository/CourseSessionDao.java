@@ -11,7 +11,7 @@ import java.util.List;
 public class CourseSessionDao {
 
     // to list all the course_session
-    public List<CourseSession> listAllCourseSession() {
+    public List<CourseSession> getAllCourseSessions() {
         List<CourseSession> courseSessionList = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -30,7 +30,7 @@ public class CourseSessionDao {
     }
 
     // to list the course_session after filter
-    public List<CourseSession> listCourseSessionByFilter(String keyWord, String date, String location ) {
+    public List<CourseSession> getCourseSessionByFilter(String keyWord, String date, String location ) {
         List<CourseSession> courseSessionList = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -44,7 +44,7 @@ public class CourseSessionDao {
     }
 
     // to insert a course with a course object
-    public void registerCourseSession(CourseSession courseSession) {
+    public void save(CourseSession courseSession) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();

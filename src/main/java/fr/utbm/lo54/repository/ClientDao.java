@@ -9,7 +9,7 @@ import org.hibernate.Session;
 public class ClientDao {
 
     // to insert a client with a client object
-    public void registerClient(Client client) {
+    public void save(Client client) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();

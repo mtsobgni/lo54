@@ -22,7 +22,7 @@ public class Seed {
 
     public static void main(String[] args) {
 //        addLocation();
-//        addClient();
+        addClient();
 //        addCourse();
 //        addCourseSession();
     }
@@ -49,12 +49,18 @@ public class Seed {
     private static void addClient() {
         List<Client> listClient = new LinkedList<Client>();
         ClientDao clientDao = new ClientDao();
+        CourseSessionDao courseSessionDao = new CourseSessionDao();
 
-        listClient.add(new Client(1,"Wei", "Maxime", "1 rue Gastion Defferre", 600000001, "maxime.wei@utbm.fr"));
-        listClient.add(new Client(2,"Liu", "Michel", "1 rue Gastion Defferre", 600000002, "michel.liu@utbm.fr"));
-        listClient.add(new Client(3,"Gou", "Louis", "1 rue Gastion Defferre", 600000003, "louis.gou@utbm.fr"));
-        listClient.add(new Client(4,"Theo", "Liang", "1 rue Gastion Defferre", 600000004, "liang.theo@utbm.fr"));
-        listClient.add(new Client(5,"Du", "Pierre", "1 rue Gastion Defferre", 600000005, "pierre.du@utbm.fr"));
+        listClient.add(new Client("Wei", "Maxime", "1 rue Gastion Defferre",
+                                    "600000001", "maxime.wei@utbm.fr", courseSessionDao.getCourseSession(1)));
+        listClient.add(new Client("Liu", "Michel", "1 rue Gastion Defferre",
+                                    "600000002", "michel.liu@utbm.fr", courseSessionDao.getCourseSession(1)));
+        listClient.add(new Client("Gou", "Louis", "1 rue Gastion Defferre",
+                                    "600000003", "louis.gou@utbm.fr", courseSessionDao.getCourseSession(1)));
+        listClient.add(new Client("Theo", "Liang", "1 rue Gastion Defferre",
+                                    "600000004", "liang.theo@utbm.fr", courseSessionDao.getCourseSession(2)));
+        listClient.add(new Client("Du", "Pierre", "1 rue Gastion Defferre",
+                                    "600000005", "pierre.du@utbm.fr", courseSessionDao.getCourseSession(2)));
 
         ListIterator<Client> itrClient = listClient.listIterator();
         while (itrClient.hasNext()) {

@@ -5,6 +5,7 @@
 <%@ page import="fr.utbm.lo54.service.CourseService" %>
 <%@ page import="fr.utbm.lo54.tools.Helper" %>
 <%@ page import="fr.utbm.lo54.service.LocationService" %>
+<%@ page import="fr.utbm.lo54.service.ClientService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -85,12 +86,14 @@
                         <th>Lieu</th>
                         <th>Date de commencement</th>
                         <th>Date de fin</th>
+                        <th>Remplissage</th>
                         <th>S'inscrire</th>
                     </tr>
                     </thead>
                     <%
                         ListIterator<CourseSession> itrCourseSession = listCourseSession.listIterator();
                         CourseService courseService = new CourseService();
+                        ClientService clientService = new ClientService();
                         LocationService locationService = new LocationService();
                         while (itrCourseSession.hasNext()) {
                             CourseSession courseSession = itrCourseSession.next();
@@ -112,7 +115,11 @@
                             <%= Helper.formatFrenchDate(courseSession.getEndDate()) %>
                         </td>
                         <td>
-                            <a href="ServletSession">S'inscrire</a>
+                            <%= clientService.getNumClient(courseSession.getIdSession()) %>/
+                            <%= courseSession.getMax() %>
+                        </td>
+                        <td>
+                            <a href="registration?idSession=<%= courseSession.getIdSession() %>">S'inscrire</a>
                         </td>
                     </tr>
                     <%}%>

@@ -27,7 +27,7 @@ public class Seed {
 //        addCourseSession();
     }
 
-    // to add some locations to the database
+    // add some locations to the database
     private static void addLocation() {
         List<Location> listLocation = new LinkedList<Location>();
         LocationDao locationDao = new LocationDao();
@@ -45,7 +45,7 @@ public class Seed {
     }
 
 
-    // to add some clients to the database
+    // add some clients to the database
     private static void addClient() {
         List<Client> listClient = new LinkedList<Client>();
         ClientDao clientDao = new ClientDao();
@@ -65,7 +65,7 @@ public class Seed {
     }
 
 
-    // to add some courses to the database
+    // add some courses to the database
     private static void addCourse() {
         List<Course> listCourse = new LinkedList<Course>();
         CourseDao courseDao = new CourseDao();
@@ -90,7 +90,7 @@ public class Seed {
     }
 
 
-    // to add some course sessions to the database
+    // add some course sessions to the database
     private static void addCourseSession() {
         List<CourseSession> listCourseSession = new LinkedList<CourseSession>();
         CourseSessionDao CourseSessionDao = new CourseSessionDao();

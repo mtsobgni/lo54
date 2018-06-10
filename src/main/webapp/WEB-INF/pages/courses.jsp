@@ -4,6 +4,7 @@
 <%@ page import="fr.utbm.lo54.entity.Location" %>
 <%@ page import="fr.utbm.lo54.service.CourseService" %>
 <%@ page import="fr.utbm.lo54.tools.Helper" %>
+<%@ page import="fr.utbm.lo54.service.LocationService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -20,9 +21,9 @@
         <div class="container">
             <br>
             <br>
-            <!--  <div  > -->
+
             <% String keyword = (String) request.getAttribute("keyword");%>
-            <form method="POST" action="search">
+            <form method="POST" action="courses" id="filter-form">
                 <fieldset class="recherche_p">
                     <legend>Filtrer</legend>
                     <div class="row">
@@ -30,9 +31,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <% if (keyword == null) { %>
-                                        <input id="s" type="text" placeholder="recherche" name="s" class="form-control left-rounded">
+                                        <input id="s" type="text" placeholder="recherche" name="keyWord" class="form-control left-rounded">
                                     <%} else { %>
-                                        <input id="s" value="<%=request.getAttribute("keyword")%>" type="text" placeholder="recherche" name="s" class="form-control left-rounded">
+                                        <input id="s" value="<%=request.getAttribute("keyword")%>" type="text" placeholder="recherche" name="keyWord" class="form-control left-rounded">
                                     <% } %>
                                     <div class="input-group-btn">
                                         <button type="submit" id="rec" class="btn btn-inverse right-rounded">
@@ -46,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <div class="icon-addon addon-md">
-                            <select name="lieu" class="form-control" style="width: 250px">
+                            <select name="location" form="filter-form" class="form-control" style="width: 250px">
                                 <option value="">Filtrer par lieu</option>
                                 <%
                                     List<Location> listLocation;
@@ -55,7 +56,7 @@
                                     while (itrLocation.hasNext()) {
                                         Location location = itrLocation.next();
                                 %>
-                                    <option>
+                                    <option value = <%= location.getId() %>>
                                         <%= location.getCity()%>
                                     </option>
                                 <%}%>
@@ -68,11 +69,10 @@
             </form>
             <%
                 List<CourseSession> listCourseSession = (List<CourseSession>) request.getAttribute("listCourseSession");
-            %>
 
-            <% if (listCourseSession.isEmpty()) {
-
-            } else {
+                if (listCourseSession == null || listCourseSession.isEmpty()) {
+                }
+                else {
             %>
             <h2>Inscrivez vouz et commencez à suivre un cours</h2>
             <h3> Nos Formations</h3>
@@ -82,6 +82,7 @@
                     <tr class="w3-light-grey">
                         <th>Code</th>
                         <th>Intitulé de la formation</th>
+                        <th>Lieu</th>
                         <th>Date de commencement</th>
                         <th>Date de fin</th>
                         <th>S'inscrire</th>
@@ -90,6 +91,7 @@
                     <%
                         ListIterator<CourseSession> itrCourseSession = listCourseSession.listIterator();
                         CourseService courseService = new CourseService();
+                        LocationService locationService = new LocationService();
                         while (itrCourseSession.hasNext()) {
                             CourseSession courseSession = itrCourseSession.next();
                     %>
@@ -99,6 +101,9 @@
                         </td>
                         <td>
                             <%= courseService.getCourse(courseSession.getCode().getCode()).getTitle() %>
+                        </td>
+                        <td>
+                            <%= locationService.getLocation(courseSession.getId().getId()).getCity() %>
                         </td>
                         <td>
                             <%= Helper.formatFrenchDate(courseSession.getStartDate()) %>

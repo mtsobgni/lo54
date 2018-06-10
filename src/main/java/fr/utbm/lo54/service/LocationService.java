@@ -13,4 +13,10 @@ public class LocationService {
         return listLocation;
     };
 
+    public Location getLocation(int id) {
+        LocationDao locationDao = new LocationDao();
+        Location location = locationDao.getLocation(id);
+        return location;
+    }
+
 }

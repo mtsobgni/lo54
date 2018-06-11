@@ -26,26 +26,41 @@ public class FiltreTestMock {
     private ListeFormation lst;
 
     //On force le resultat du DAO en imposant lors de l'execution du service d'utiliser cette reponse
-    Object[] tr = new Object[]{null,null};
-    Object[] trr = new Object[]{null,null};
-    Object[] trrr = new Object[]{null,null};
+    Object[] tr = new Object[]{"1","BELFORT"};
+    Object[] trr = new Object[]{"2","LILLE"};
+    Object[] trrr = new Object[]{"3","MADRID"};
 
     ArrayList<Object[]> list = new ArrayList<Object[]>( Arrays.asList(tr, trr, trrr));
+
+    Object[] lr = new Object[]{"1","2018-02-18"};
+    Object[] lrr = new Object[]{"2","2019-01-03"};
+    Object[] lrrr = new Object[]{"3","2018-10-11"};
+
+    ArrayList<Object[]> listA = new ArrayList<Object[]>( Arrays.asList(lr, lrr, lrrr));
 
 
     @Test
     public void test() throws ParseException {
-        String code= "2";
+        String code= "1";
+       // code= "%" + code + "%";
         String lieu ="BELFORT";
-        String date = "2018-02-18";
-       // BDDMockito.given(hb.filtreCourse(anyString(),anyString()).willReturn(list);
+      //  lieu= "%" + lieu + "%";
+       String date = "2018-02-18";
+       String dateA="2018-02-10";
+        //BDDMockito.given(hb.filtreCourse(anyString(),anyString()).willReturn(list);
         //BDDMockito.given(hb.filtreCourseDate(anyString(),anyString(),anyString())).willReturn(list);
-        Mockito.when(hb.filtreCourse(anyString(),anyString())).thenReturn(list);
-        Mockito.when(hb.filtreCourseDate(anyString(),anyString(),anyString())).thenReturn(list);
+        Mockito.when(hb.filtreCourse(code,lieu)).thenReturn(list);
+        Mockito.when(hb.filtreCourseDate(code,lieu,date)).thenReturn(list);
 
-       List<Object[]> toto =lst.filtreFormationDate("2","belfort","2018-02-13");
+      List<Object[]> toto =lst.filtreFormationDate(code,lieu,date);
+
+
+
+      // List<Object[]> mockTest =lst.filtreFormationDate(code,lieu,dateA);
 
         Assertions.assertThat(list).isEqualTo(toto);
+
+      //  Assertions.assertThat(listA).isEqualTo(mockTest);
     }
 
     @Before

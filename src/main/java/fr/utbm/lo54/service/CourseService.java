@@ -19,4 +19,10 @@ public class CourseService {
         return listCourse;
     };
 
+    public List<Course> listCourseByFilter(String keyWord, String locationId, String date) {
+        CourseDao courseDao = new CourseDao();
+        List<Course> listCourse = courseDao.getCourseByFilter(keyWord, locationId, date);
+        return listCourse;
+    }
+
 }

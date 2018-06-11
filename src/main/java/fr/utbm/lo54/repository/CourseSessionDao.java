@@ -6,9 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CourseSessionDao {
@@ -40,6 +37,20 @@ public class CourseSessionDao {
         return courseSessionList;
     }
 
+    // list the course_session who has the code
+    public List<CourseSession> getCourseSessionsByCode(String code) {
+        List<CourseSession> courseSessionList = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("select cs from course_session cs, course c where cs.code = c.code and c.code = :code");
+            query.setParameter("code", code);
+            courseSessionList = query.list();
+        }   catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return courseSessionList;
+    }
+
     // insert a course with a course object
     public void save(CourseSession courseSession) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -62,51 +73,4 @@ public class CourseSessionDao {
         }
     }
 
-    // list the course after filter
-    public List<CourseSession> getCourseSessionByFilter(String keyWord, String locationId, String date) {
-        List<CourseSession> courseSessionList = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        try {
-            String queryVar = generateFilterQuery(keyWord, locationId, date);
-            Query query = session.createQuery(queryVar);
-            if (keyWord != null && !keyWord.isEmpty()) {
-                query.setParameter("keyWord", "%" + keyWord + "%");
-            }
-            if (locationId != null && !locationId.isEmpty()) {
-                query.setParameter("locationId", Integer.parseInt(locationId));
-            }
-            if (date != null && !date.isEmpty()) {
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                query.setParameter("date", new Date(formatter.parse(date).getTime()));
-            }
-
-//            System.out.println("**********QUERY**********");
-//            System.out.println(queryVar);
-//            System.out.println("********************");
-
-            courseSessionList = query.list();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return courseSessionList;
-    }
-
-    // generate the query by keyword locationId and date
-    private String generateFilterQuery(String keyWord, String locationId, String date) {
-        String queryVar = "select cs from course_session cs, course c, location l where cs.code = c.code and cs.id = l.id";
-        if (keyWord != null && !keyWord.isEmpty()) {
-            queryVar += " and lower(c.title) like lower(:keyWord)";
-        }
-        if (locationId != null && !locationId.isEmpty()) {
-            queryVar += " and l.id = :locationId";
-        }
-        if (date != null && !date.isEmpty()) {
-            queryVar += " and :date >= cs.startDate and :date <= cs.endDate";
-        }
-        return queryVar;
-    }
 }

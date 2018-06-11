@@ -1,9 +1,7 @@
-<%@ page import="fr.utbm.lo54.entity.CourseSession" %>
+<%@ page import="fr.utbm.lo54.entity.Course" %>
 <%@ page import="fr.utbm.lo54.entity.Location" %>
-<%@ page import="fr.utbm.lo54.service.ClientService" %>
 <%@ page import="fr.utbm.lo54.service.CourseService" %>
 <%@ page import="fr.utbm.lo54.service.LocationService" %>
-<%@ page import="fr.utbm.lo54.tools.Helper" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -58,9 +56,9 @@
                 </form>
             </div>
             <%
-                List<CourseSession> listCourseSession = (List<CourseSession>) request.getAttribute("listCourseSession");
+                List<Course> listCourse = (List<Course>) request.getAttribute("listCourse");
 
-                if (listCourseSession == null || listCourseSession.isEmpty()) {
+                if (listCourse == null || listCourse.isEmpty()) {
                 } else {
             %>
             <h3 class="mb-4"> Nos Formations</h3>
@@ -70,44 +68,24 @@
                         <tr>
                             <th>Code</th>
                             <th>Intitulé de la formation</th>
-                            <th>Lieu</th>
-                            <th>Date de commencement</th>
-                            <th>Date de fin</th>
-                            <th>Remplissage</th>
                             <th>S'inscrire</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
-                            ListIterator<CourseSession> itrCourseSession = listCourseSession.listIterator();
-                            CourseService courseService = new CourseService();
-                            ClientService clientService = new ClientService();
-                            LocationService locationService = new LocationService();
-                            while (itrCourseSession.hasNext()) {
-                                CourseSession courseSession = itrCourseSession.next();
+                            ListIterator<Course> itrCourse = listCourse.listIterator();
+                            while (itrCourse.hasNext()) {
+                                Course course = itrCourse.next();
                         %>
                         <tr>
                             <td>
-                                <%= courseSession.getCode().getCode() %>
+                                <%= course.getCode() %>
                             </td>
                             <td>
-                                <%= courseService.getCourse(courseSession.getCode().getCode()).getTitle() %>
+                                <%= course.getTitle() %>
                             </td>
                             <td>
-                                <%= locationService.getLocation(courseSession.getId().getId()).getCity() %>
-                            </td>
-                            <td>
-                                <%= Helper.formatFrenchDate(courseSession.getStartDate()) %>
-                            </td>
-                            <td>
-                                <%= Helper.formatFrenchDate(courseSession.getEndDate()) %>
-                            </td>
-                            <td class="text-center">
-                                <%= clientService.getNumClient(courseSession.getIdSession()) %>/
-                                <%= courseSession.getMax() %>
-                            </td>
-                            <td>
-                                <a href="registration?idSession=<%= courseSession.getIdSession() %>">S'inscrire</a>
+                                <a href="courseSessions?code=<%= course.getCode() %>">S'inscrire</a>
                             </td>
                         </tr>
                         <%}%>

@@ -13,15 +13,15 @@ public class CourseSessionService {
         return courseSession;
     }
 
+    public List<CourseSession> listCourseSessionByCode(String code) {
+        CourseSessionDao courseSessionDao = new CourseSessionDao();
+        List<CourseSession> listCourseSession = courseSessionDao.getCourseSessionsByCode(code);
+        return  listCourseSession;
+    }
+
     public List<CourseSession> listAllCourseSessions() {
         CourseSessionDao courseSessionDao = new CourseSessionDao();
         List<CourseSession> listCourseSession = courseSessionDao.getAllCourseSessions();
-        return listCourseSession;
-    }
-
-    public List<CourseSession> listCourseByFilter(String keyWord, String locationId, String date) {
-        CourseSessionDao courseSessionDao = new CourseSessionDao();
-        List<CourseSession> listCourseSession = courseSessionDao.getCourseSessionByFilter(keyWord, locationId, date);
         return listCourseSession;
     }
 

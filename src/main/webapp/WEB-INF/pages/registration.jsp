@@ -20,8 +20,9 @@
                 Integer idSession = Integer.parseInt(request.getParameter("idSession"));
                 CourseSession courseSession = courseSessionDao.getCourseSession(idSession);
             %>
-            <p class="font-weight-bold"><%= courseSession.getCode().getTitle() %></p>
-            <p><%= Helper.formatFrenchDate(courseSession.getStartDate()) %> - <%= Helper.formatFrenchDate(courseSession.getEndDate()) %> <%= courseSession.getId().getCity() %></p>
+            <p class="font-weight-bold"><%= courseSession.getCode().getCode() %> - <%= courseSession.getCode().getTitle() %></p>
+            <p><%= Helper.formatFrenchDate(courseSession.getStartDate()) %> - <%= Helper.formatFrenchDate(courseSession.getEndDate()) %></p>
+            <p>à <%= courseSession.getId().getCity() %></p>
         </div>
         <form method="post" action="registration">
             <input type="hidden" name="idSession" value=<%= request.getParameter("idSession") %>>

@@ -19,7 +19,7 @@ public class RegistrationServlet extends HttpServlet {
                                         request.getParameter("phone"),
                                         request.getParameter("email"),
                                         Integer.parseInt(request.getParameter("idSession")));
-        this.getServletContext().getRequestDispatcher("/WEB-INF/pages/courses.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/courses").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

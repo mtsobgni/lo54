@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = {"/registration"})
 public class RegistrationServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ClientService clientService = new ClientService();
         clientService.registerClient(request.getParameter("firstname"),
                                         request.getParameter("lastname"),

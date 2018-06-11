@@ -35,7 +35,7 @@
                 return false;
             }
 
-            alter("Votre inscription a été bien enregistré");
+            confirm("Votre inscription a été bien enregistré");
         }
     </script>
     <title> Inscription </title>

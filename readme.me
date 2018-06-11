@@ -1,0 +1,9 @@
+select count(*) from client;
+
+create sequence client_a_seq start with 6;
+
+alter table client alter column id_client set default nextval('client_a_seq');
+
+alter sequence client_a_seq owned by client.id_client;
+
+grant usage, select on all sequences in schema public to postgres;

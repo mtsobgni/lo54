@@ -16,12 +16,12 @@ public class Course {
     @Column(name="title")
     private String title;
 
+    public Course() {
+    }
+
     public Course(String code, String title) {
         this.code = code;
         this.title = title;
-    }
-
-    public Course() {
     }
 
     public String getCode() {
@@ -38,6 +38,14 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 
     @Override

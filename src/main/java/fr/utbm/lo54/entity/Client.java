@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Client implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_client")
     private int idClient;
 
@@ -34,8 +33,15 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public Client(int idClient, String lastname, String firstname, String address, String phone, String email, CourseSession idSession) {
-        this.idClient = idClient;
+    public Client(String firstname, String lastname, String address, String phone, String email) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Client(String firstname, String lastname, String address, String phone, String email, CourseSession idSession) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;

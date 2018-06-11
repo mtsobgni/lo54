@@ -1,41 +1,38 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <!--
 <hibernate-configuration>
   <session-factory>
     <property name="connection.url"/>
     <property name="connection.driver_class"/>-->
-    <!-- <property name="connection.username"/> -->
-    <!-- <property name="connection.password"/> -->
+<!-- <property name="connection.username"/> -->
+<!-- <property name="connection.password"/> -->
 
-    <!-- DB schema will be updated if needed -->
-    <!-- <property name="hbm2ddl.auto">update</property>
-  </session-factory>
+<!-- DB schema will be updated if needed -->
+<!-- <property name="hbm2ddl.auto">update</property>
+</session-factory>
 </hibernate-configuration>    -->
 
 <hibernate-configuration>
-<session-factory>
-
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Formation</property>
-    <property name="connection.username">postgres </property>
-    <property name="connection.password">Lecombattant1 </property>
-
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/formation</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">Lecombattant1</property>
 
 
+        <property name="connection_pool_size">1</property>
+        <property name="hbm2ddl.auto">validate</property>
+        <property name="show_sql">true</property>
 
-  <property name="connection_pool_size">1</property>
-  <property name="hbm2ddl.auto">validate</property>
-  <property name="show_sql">true</property>
-
-  <mapping class="fr.utbm.lo54.entity.Client"/>
-  <mapping class="fr.utbm.lo54.entity.Course"/>
-  <mapping class="fr.utbm.lo54.entity.Location"/>
-  <mapping class="fr.utbm.lo54.entity.CourseSession"/>
+        <mapping class="fr.utbm.lo54.entity.Client"/>
+        <mapping class="fr.utbm.lo54.entity.Course"/>
+        <mapping class="fr.utbm.lo54.entity.Location"/>
+        <mapping class="fr.utbm.lo54.entity.CourseSession"/>
 
 
-</session-factory>
+    </session-factory>
 </hibernate-configuration>

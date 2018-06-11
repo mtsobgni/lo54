@@ -19,7 +19,7 @@ public class CourseSession implements Serializable {
     private Date endDate;
 
     @Column(name="max")
-    private Integer max;
+    private int max;
 
     @ManyToOne
     @JoinColumn(name = "id")
@@ -32,7 +32,15 @@ public class CourseSession implements Serializable {
     public CourseSession() {
     }
 
-    public CourseSession(int idSession, Date startDate, Date endDate, Integer max, Location id, Course code) {
+    public CourseSession(Date startDate, Date endDate, int max, Location id, Course code) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.max = max;
+        this.id = id;
+        this.code = code;
+    }
+
+    public CourseSession(int idSession, Date startDate, Date endDate, int max, Location id, Course code) {
         this.idSession = idSession;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -84,7 +92,7 @@ public class CourseSession implements Serializable {
         this.endDate = endDate;
     }
 
-    public void setMax(Integer max) {
+    public void setMax(int max) {
         this.max = max;
     }
 

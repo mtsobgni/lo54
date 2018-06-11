@@ -18,43 +18,31 @@ import java.util.List;
 @WebServlet(name="ServletSearch" , urlPatterns = {"/search"})
 public class ServletSearch extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // request.setAttribute( "test", message );
-        String search= (String) request.getParameter("s");
+
+        String search= (String) request.getParameter("keyword");
         String lieu= (String) request.getParameter("lieu");
         String date= (String)request.getParameter("date");
+
+        List<Location> resultat=null;
+        List<Object []> result=null;
+
+        ListeFormation sv1= new ListeFormation();
+
+        result=sv1.filtreFormationDate(search,lieu, date);
+        resultat=sv1.listLocation();
+
+        request.setAttribute( "list", result );
+        request.setAttribute( "liste", resultat );
         request.setAttribute("lieu",lieu);
         request.setAttribute("date",date);
         request.setAttribute("keyword",search);
-        search="%" + search+ "%";
-        lieu="%" + lieu + "%";
-        List<CourseSession> result=null;
-        ListeFormation sv1= new ListeFormation();
-       // long millis=System.currentTimeMillis();
-        //Date date1 = new Date(millis);
-        if(date.isEmpty()){
-            result=sv1.filtreCourse(search, lieu);
 
-        }
-        else{
-
-            try {
-                result=sv1.filtreCourseDate(search, lieu, date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        request.setAttribute( "list", result );
-
-        List<Location> resultat;
-        ListeFormation sv2= new ListeFormation();
-        resultat=sv2.listLocation();
-        request.setAttribute( "liste", resultat );
         this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/search.jsp"
         ).forward( request, response );
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//  request.setAttribute( "test", message );
+
 
     }
 }

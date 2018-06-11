@@ -8,43 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+    <jsp:include page="enTete.jsp" />
+    <title> Accueil Formation</title>
 
-    <title> Accueil formation</title>
-
-    <link rel="shortcut icon" href="assets/images/gt_favicon.png">
-
-    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
-    <!-- Custom styles for our template -->
-    <link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
-    <link rel="stylesheet" href="assets/css/main.css">
-
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body class="home">
+
 <jsp:include page="header.jsp" />
-<!-- Fixed navbar -->
 
-<!-- /.navbar -->
-
-<!-- Header -->
 <header id="head">
     <div class="container">
         <div class="row">
             <h1 class="lead">MOOC est une plate-forme d'etudes en ligne spécialisé dans plusieurs domaines</h1>
-            <p><a class="btn btn-default btn-lg" role="button">MORE INFO</a> <a class="btn btn-action btn-lg" role="button">Découvrir nos formations</a></p>
+            <p><a class="btn btn-default btn-lg" role="button">MORE INFO</a> <a href="/lo54/formation" class="btn btn-action btn-lg" role="button">Découvrir nos formations</a></p>
         </div>
     </div>
 </header>
@@ -57,8 +33,8 @@
     <br> <br>
     <h2 class="thin">Parmis les meilleures en FRANCE</h2>
     <p class="text-muted">
-        The difference between involvement and commitment is like an eggs-and-ham breakfast:<br>
-        the chicken was involved; the pig was committed.
+        Vous offre les meilleures cours aussi bien theoriques que pratiques
+        Présent dans plusieurs région de la france
     </p>
 </div>
 <!-- /Intro-->
@@ -123,11 +99,5 @@
 
 <jsp:include page="footer.jsp" />
 
-<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="assets/js/headroom.min.js"></script>
-<script src="assets/js/jQuery.headroom.min.js"></script>
-<script src="assets/js/template.js"></script>
 </body>
 </html>

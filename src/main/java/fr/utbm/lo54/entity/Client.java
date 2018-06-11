@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Client implements Serializable {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_client")
     private int idClient;
 
@@ -21,7 +22,7 @@ public class Client implements Serializable {
     private String address;
 
     @Column(name="phone")
-    private int phone;
+    private String phone;
 
     @Column(name="email")
     private String email;
@@ -33,7 +34,7 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public Client(int idClient, String lastname, String firstname, String address, int phone, String email, CourseSession idSession) {
+    public Client(int idClient, String lastname, String firstname, String address, String phone, String email, CourseSession idSession) {
         this.idClient = idClient;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -108,11 +109,11 @@ public class Client implements Serializable {
         this.address = address;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

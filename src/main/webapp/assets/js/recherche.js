@@ -1,13 +1,13 @@
 $(document).ready(function() {
-    $('#rec').click(function() {
+    $('#search').click(function() {
         $.ajax({
             url : 'find',
             data : {
-                val : $('#s').val()
+                val : $('#keyword').val()
             },
             type:'POST',
             success : function(responseText) {
-                $('#lo').text(responseText);
+                $('#keyword').text(responseText);
 
             }
         });

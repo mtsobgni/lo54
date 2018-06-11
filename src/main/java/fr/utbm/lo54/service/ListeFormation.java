@@ -22,7 +22,6 @@ public class ListeFormation {
 
     public List<Course> listeCourse(){
         List<Course> list;
-        HibernateDao hb1= new HibernateDao();
         list=hb1.doSomething();
         return list;
     }
@@ -33,16 +32,14 @@ public class ListeFormation {
         return list;
 
     }
-    public List<CourseSession> listeSessionFormation(String code, String lieu){
+ /*   public List<CourseSession> listeSessionFormation(String code, String lieu){
         List<CourseSession> list;
-        HibernateDao hb1= new HibernateDao();
         list=hb1.listSessionFormation(code, lieu);
         return list;
     }
 
     public List<CourseSession> listeSession(String code){
         List<CourseSession> list;
-       // HibernateDao hb1= new HibernateDao();
         list=hb1.listSession(code);
         return list;
     }
@@ -50,7 +47,6 @@ public class ListeFormation {
 
     public List<CourseSession> listeSessionFormationDate(String code, String lieu, String date)throws ParseException{
         List<CourseSession> list;
-        HibernateDao hb1= new HibernateDao();
         list=hb1.listSessionFormationDate(code, lieu, date);
         return list;
     }
@@ -58,15 +54,64 @@ public class ListeFormation {
 
     public List<CourseSession> filtreCourse(String code, String lieu){
         List<CourseSession> list;
-        HibernateDao hb1= new HibernateDao();
         list=hb1.filtreCourse(code, lieu);
         return list;
     }
 
     public List<CourseSession> filtreCourseDate(String code, String lieu, String date) throws ParseException {
         List<CourseSession> list;
-        HibernateDao hb1= new HibernateDao();
         list=hb1.filtreCourseDate(code, lieu, date);
         return list;
+    }*/
+
+    public List<Object []>filtreFormationDate(String code, String lieu, String date){
+
+        List<Object []> result=null;
+        code="%" + code+ "%";
+        lieu="%" + lieu + "%";
+
+        if(date.isEmpty()){
+            result=hb1.filtreCourse(code, lieu);
+
+        }
+        else{
+
+            try {
+                result=hb1.filtreCourseDate(code, lieu, date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
     }
+
+    public List<CourseSession> SessionFormationDate(String code, String lieu, String date)throws ParseException{
+        List<CourseSession> reslt=null;
+
+        if(lieu.isEmpty() && date.isEmpty()){
+            reslt=hb1.listSession(code);
+        }
+        else if (date.isEmpty()){
+            lieu="%" + lieu + "%";
+            reslt=hb1.listSessionFormation(code,lieu);
+        }
+        else  {
+            try {
+                reslt=hb1.listSessionFormationDate(code,lieu,date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return reslt;
+    }
+
+    public Long userSession(Integer idSession){
+
+        Long count=null;
+        count=hb1.userSession(idSession);
+        System.out.println(count);
+        return count;
+    }
+
 }

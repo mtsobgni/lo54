@@ -16,8 +16,6 @@ public class Course {
     @Column(name="title")
     private String title;
 
-   // private Set<CourseSession> CourseSessions = new HashSet<>(0);
-
     public Course(String code, String title) {
         this.code = code;
         this.title = title;

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <course code="1" title="Programmation JAVA"/>
+  <course code="2" title="R&#233;seaux"/>
+  <course code="3" title="ANGLAIS"/>
+  <course code="4" title="BASE DE DONNES"/>
+  <location id="1" city="BELFORT"/>
+  <location id="2" city="LILLE"/>
+  <location id="3" city="PARIS"/>
+  <location id="4" city="MADRID"/>
+  <course_session id_session="1" id="1" code="1" start_date="2018-05-01" end_date="2018-05-01" max="45"/>
+  <course_session id_session="2" id="2" code="3" start_date="2018-05-01" end_date="2018-05-01" max="5"/>
+  <course_session id_session="3" id="3" code="2" start_date="2018-05-01" end_date="2018-05-01" max="5"/>
+  <course_session id_session="4" id="4" code="4" start_date="2018-07-08" end_date="2018-12-01" max="25"/>
+  <course_session id_session="5" id="2" code="1" start_date="2018-09-08" end_date="2019-01-01" max="15"/>
+  <course_session id_session="6" id="1" code="2" start_date="2019-01-08" end_date="2019-04-01" max="20"/>
+  <course_session id_session="7" id="3" code="3" start_date="2018-10-08" end_date="2019-01-01" max="20"/>
+  <course_session id_session="8" id="1" code="4" start_date="2018-06-08" end_date="2018-10-01" max="25"/>
+  <client id_client="1" id_session="1" lastname="Bike" firstname="Benito" address="3 rue gaston deferre" phone="7" email="benito.tsobgni@yahoo.fr"/>
+  <client id_client="2" id_session="2" lastname="Loick" firstname="TSOBGNI" address="3 rue gaston deferre" phone="7" email="benito.tsobgni@yahoo.fr"/>
+</dataset>

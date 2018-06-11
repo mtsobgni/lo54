@@ -22,73 +22,31 @@ public class ServletSession extends HttpServlet  {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String code ;
-        List<CourseSession> reslt=null;
         String lieu;
         String date;
         code = (request.getParameter("code") != null) ? request.getParameter("code") : "null";
         lieu = (request.getParameter("lieu") != null) ? request.getParameter("lieu") : "null";
-        lieu = "%" + lieu +"%";
         date = (request.getParameter("date") != null) ? request.getParameter("date") : "null";
-        String titre = (String)request.getParameter("titre");
+        String titre = request.getParameter("titre");
+
+        List<CourseSession> reslt= null;
         ListeFormation sv1= new ListeFormation();
-        if(lieu.isEmpty() && date.isEmpty()){
-            reslt=sv1.listeSession(code);
-        }
-        else if (date.isEmpty()){
-            reslt=sv1.listeSessionFormation(code,lieu);
-           // reslt=null;
-        }
-        else  {
-            try {
-                reslt=sv1.listeSessionFormationDate(code,lieu,date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            reslt=sv1.SessionFormationDate(code, lieu, date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
 
-       request.setAttribute("lieu",lieu);
+        request.setAttribute("lieu",lieu);
         request.setAttribute("code",code);
         request.setAttribute("date",date);
         request.setAttribute("titre",titre);
-
-
-
         request.setAttribute("listSession",reslt);
+
         this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/session.jsp"
         ).forward( request, response );
 
-/*
-       // <h3>name: ${name != null && name != "" ? name : 'not assigned' }</h3>
-
-        String titre = (String)request.getParameter("titre");
-
-        lieu = "%"+ lieu+ "%";
-        //String date = (String)request.getParameter("date");
-        List<CourseSession> reslt=null;
-        ListeFormation sv1= new ListeFormation();
-      //  if((code==null) ){
-
-       // }
-        if(date.isEmpty()){
-            if(lieu==null){
-                reslt=sv1.listeSession(code);
-            }else{
-                reslt=sv1.listeSessionFormation(code,lieu);
-            }
-
-        }
-        else{
-            try {
-                reslt=sv1.listeSessionFormationDate(code,lieu,date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        request.setAttribute("listSession",reslt);
-        request.setAttribute("title",titre);
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/session.jsp"
-        ).forward( request, response );*/
     }
 }

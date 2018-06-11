@@ -1,9 +1,5 @@
-<%@ page import="fr.utbm.lo54.entity.Course" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.sql.ResultSetMetaData" %>
-<%@ page import="java.util.ListIterator" %>
-<%@ page import="fr.utbm.lo54.entity.CourseSession" %>
-<%@ page import="fr.utbm.lo54.entity.Location" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Bike
@@ -12,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <html lang="en">
 <head>
     <jsp:include page="enTete.jsp" />
@@ -28,23 +25,17 @@
         <br>
         <br>
       <!--  <div  > -->
-        <% String keyword= (String) request.getAttribute("keyword");%>
         <form method="POST" action="search" >
             <fieldset class="recherche_p" >
                 <legend>Filtrer</legend>
-                <!--    <form role="search" >-->
+
                        <div class="row">
                            <div class="col-sm-8">
                                <div class="form-group">
                                    <div class="input-group">
-                                      <% if(keyword==null){
-                                      %>
-                                           <input id="s"  type="text" placeholder="recherche" name="s" class="form-control left-rounded">
-                                      <%}else{ %>
-                                           <input id="s" value="<%=request.getAttribute("keyword")%>" type="text" placeholder="recherche" name="s" class="form-control left-rounded">
-                                     <% } %>
+                                           <input id="keyword" type="text" placeholder="recherche" name="keyword" class="form-control left-rounded">
                                        <div class="input-group-btn">
-                                           <button type="submit" id="rec" class="btn btn-inverse right-rounded">Chercher</button>
+                                           <button type="submit" id="search" class="btn btn-inverse right-rounded">Chercher</button>
                                        </div>
                                    </div>
                                </div>
@@ -55,18 +46,9 @@
                            <div class="icon-addon addon-md">
                                <select name="lieu" class="form-control" style="width: 250px">
                                    <option value="">Filtrer par lieu</option>
-                                   <%
-                                       List<Location> list;
-                                       list = (List<Location>) request.getAttribute("liste");
-                                       //String lieu = (String) request.getAttribute("lieu");
-                                       //String date = (String) request.getAttribute("date");
-                                       ListIterator<Location> ite = list.listIterator();
-                                       while (ite.hasNext())
-                                       {
-                                           Location d=ite.next();
-                                   %>
-                                   <option><%= d.getCity()%></option>
-                                   <%}%>
+                                   <c:forEach items="${ liste }" var="location" varStatus="status">
+                                       <option> <c:out value="${ location.city }" /></option>
+                                   </c:forEach>
                                </select>
                                <i class="icon icon-search"></i>
                            </div>
@@ -74,55 +56,36 @@
 
         </fieldset>
     </form>
-<%List<Course> lst;
-    lst = (List<Course>) request.getAttribute("list");
-    %>
-
-        <% if(lst.isEmpty()){
-
-        }
-        else {
-            %>
-        <h2>Inscrivez vouz et commencez à suivre un cours</h2>
-        <h3> Nos Formations</h3>
+        <c:set var="date" value="" scope="page" />
+        <c:set var="lieu" value="" scope="page" />
+        <c:choose>
+            <c:when test="${ empty list }">Du texte</c:when>
+            <c:otherwise>
+                <h2>Inscrivez vouz et commencez à suivre un cours</h2>
+                <h3> Nos Formations</h3>
         <form method="post" action="ServletSession">
-        <div id="lo" class="w3-container">
-            <table style="width:750px" class="w3-table-all w3-hoverable">
-                <thead>
-                <tr class="w3-light-grey">
-                    <th>Code</th>
-                    <th>Intitulé de la formation</th>
-                    <th>S'inscrire à une session</th>
-                </tr>
-                </thead>
-                <%
-                    String lieu="";
-                  //  lieu="%"+lieu+"%";
-                    String date= "";
-                   // date="%"+date+"%";
-                    ListIterator<Course> li = lst.listIterator();
-                    while (li.hasNext())
-                    {
-                        Course c=li.next();
-                %>
-                <tr>
-                    <td><%= c.getCode()%></td>
-                    <td><%= c.getTitle()%></td>
-                    <!--  <td> <button type="submit" id="detail" name="detail"> S'inscrire à une session </button> </td>-->
-                    <!--    <td><a href="ServletSession?code=<%//=c.getCode().getCode()%>&titre=<%//=c.getCode().getTitle()%>&date=<%//=date%>&lieu=<%//=lieu%>">S'inscrire à une session </a></td>-->
-                <td><a href="ServletSession?code=<%=c.getCode()%>&titre=<%=c.getTitle()%>&date=<%=date%>&lieu=<%=lieu%>">S'inscrire à une session </a></td>
-                </tr>
-                <%}%>
-            </table>
+            <div id="lo" class="w3-container">
+                <table style="width:750px" class="w3-table-all w3-hoverable">
+                    <thead>
+                    <tr class="w3-light-grey">
+                        <th>Code</th>
+                        <th>Intitulé de la formation</th>
+                        <th>S'inscrire à une session</th>
+                    </tr>
+                    </thead>
+                    <c:forEach items="${ list }" var="course" varStatus="status">
+                    <tr>
+                        <td><c:out value="${ course.code }" /></td>
+                        <td><c:out value="${ course.title }" /></td>
+
+                        <td><a href="ServletSession?code=${ course.code }&titre=${ course.title }&date=${ date }&lieu${ lieu }">S'inscrire à une session </a></td>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </c:otherwise>
+        </c:choose>
         </div>
         </form>
-        <div class="container">
-
-
-        </div><!-- /.container -->
-
-    <%    }%>
-
 </div>
 </div>
 

@@ -20,40 +20,23 @@ public class ServletFormation extends HttpServlet {
 
         public void doGet(HttpServletRequest request, HttpServletResponse
                 response ) throws ServletException, IOException {
-          //  request.setAttribute( "test", message );
+
             List<Course> result;
+            List<Location> resultat;
             ListeFormation sv1= new ListeFormation();
             result=sv1.listeCourse();
+            resultat=sv1.listLocation();
+
             request.setAttribute( "list", result );
-            List<Location> resultat;
-            ListeFormation sv2= new ListeFormation();
-            resultat=sv2.listLocation();
             request.setAttribute( "liste", resultat );
+
             this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/formation.jsp"
             ).forward( request, response );
         }
 
     public void doPost(HttpServletRequest request, HttpServletResponse
             response ) throws ServletException, IOException {
-        // request.setAttribute( "test", message );
-       String search= (String) request.getParameter("s");
-        String lieu= (String) request.getParameter("lieu");
-        String date= (String)request.getParameter("date");
-        request.setAttribute("lieu",lieu);
-        request.setAttribute("date",date);
-        request.setAttribute("keyword",search);
-       search="%" + search;
-        List<CourseSession> result;
-        ListeFormation sv1= new ListeFormation();
-        long millis=System.currentTimeMillis();
-        Date date1 = new Date(millis);
-        result=sv1.filtreCourse(search, lieu);
-        request.setAttribute( "list", result );
-        List<Location> resultat;
-        ListeFormation sv2= new ListeFormation();
-        resultat=sv2.listLocation();
-        request.setAttribute( "liste", resultat );
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/formation.jsp"
-        ).forward( request, response );
+
+
     }
 }

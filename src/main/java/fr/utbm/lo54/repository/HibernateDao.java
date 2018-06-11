@@ -1,15 +1,14 @@
 package fr.utbm.lo54.repository;
 
-
 import fr.utbm.lo54.entity.Client;
 import fr.utbm.lo54.entity.Course;
 import fr.utbm.lo54.entity.CourseSession;
 import fr.utbm.lo54.entity.Location;
 import fr.utbm.lo54.tools.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,22 +56,20 @@ while(li.hasNext()){
        return CourseList;
     }
 
-    public  List<CourseSession> filtreCourse(String keyword, String lieu) {
-        List<CourseSession> CourseList=null;
+    public  List<Object []> filtreCourse(String keyword, String lieu) {
+        List<Object[]> CourseSessions=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Query query = session.createQuery("  from  course_session c where c.code.title like :title AND c.id.city like :city  ");
-            //  Query query = session.createQuery("insert into Course(title) values ('programmation Java') ");
+            Query query = session.createQuery("select distinct c.code.code, c.code.title from course_session c where c.code.title like :title AND c.id.city like :city ");
             query.setParameter("title",keyword);
             query.setParameter("city",lieu);
-         //   final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            CourseList = query.list();
-            ListIterator<CourseSession> li = CourseList.listIterator();
-
-
-            while(li.hasNext()){
-                System.out.println(li.next().getCode().getTitle());
-            }
+             CourseSessions= (List<Object[]>)query.list();
+          /*  for (Object[] CourseSession: CourseSessions){
+                String code= (String)CourseSession[0];
+                System.out.println(code);
+                String name = (String)CourseSession[1];
+                System.out.println(name);
+            }*/
             //session.getTransaction().commit();
 
 
@@ -94,33 +91,36 @@ while(li.hasNext()){
 				...
     }
 */
-        return CourseList;
+        return CourseSessions;
     }
 
-    public  List<CourseSession> filtreCourseDate(String keyword, String lieu, String date) throws ParseException {
-        List<CourseSession> CourseList=null;
+    public  List<Object []> filtreCourseDate(String keyword, String lieu, String date) throws ParseException {
+        List<Object[]> CourseSessions=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         long millis=System.currentTimeMillis();
         Date date1 = new Date(millis);
         Date startDate = null;
-        //startDate = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(date);
+
         startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
-        //cs.setDate(1,(java.sql.Date) startDate);
+
         try {
-            Query query = session.createQuery(" from course_session c where c.code.title like :title AND c.id.city like :city  AND c.startDate between :startDate and :dayDate");
-            //  Query query = session.createQuery("insert into Course(title) values ('programmation Java') ");
+            Query query = session.createQuery(" select distinct c.code.code, c.code.title from course_session c where c.code.title like :title AND c.id.city like :city  AND c.startDate between :dayDate and :startDate");
+           // Query query = getSession().createQuery("from java_pojo_name");
+            query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            //query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            //return query.list();
             query.setParameter("title",keyword);
             query.setParameter("city",lieu);
             query.setParameter("startDate",startDate);
             query.setParameter("dayDate",date1);
-            //   final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            CourseList = query.list();
-            ListIterator<CourseSession> li = CourseList.listIterator();
+
+            CourseSessions= (List<Object[]>)query.list();
+           /* ListIterator<CourseSession> li = CourseList.listIterator();
 
 
             while(li.hasNext()){
-                System.out.println(li.next().getCode().getTitle());
-            }
+                System.out.println(li.next().getStartDate());
+            }*/
             //session.getTransaction().commit();
 
 
@@ -142,7 +142,7 @@ while(li.hasNext()){
 				...
     }
 */
-        return CourseList;
+        return CourseSessions;
     }
 
     public  List<Location> listLocation() {
@@ -150,7 +150,6 @@ while(li.hasNext()){
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Query query = session.createQuery("from location ");
-            //  Query query = session.createQuery("insert into Course(title) values ('programmation Java') ");
 
             LocationList = query.list();
             ListIterator<Location> li = LocationList.listIterator();
@@ -183,7 +182,7 @@ while(li.hasNext()){
         return LocationList;
     }
 
-    public  List<CourseSession> listSession(String code, String lieu, String date) {
+    public  List<CourseSession> otherListSession(String code, String lieu, String date) {
         List<CourseSession> CourseList=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -231,7 +230,7 @@ while(li.hasNext()){
         Date startDate = null;
             startDate = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
         try {
-            Query query = session.createQuery("from course_session D where D.code.code= :id AND D.id.city like :city AND D.startDate between :startDate and :dayDate ");
+            Query query = session.createQuery("from course_session D where D.code.code= :id AND D.id.city like :city AND D.startDate between :dayDate and :startDate ");
             query.setParameter("id",code);
             query.setParameter("city",lieu);
             query.setParameter("startDate",startDate);
@@ -243,7 +242,7 @@ while(li.hasNext()){
 
 
             while(li.hasNext()){
-                System.out.println(li.next().getEndDate());
+                System.out.println(li.next().getStartDate());
             }
             //session.getTransaction().commit();
 
@@ -283,7 +282,7 @@ while(li.hasNext()){
 
 
             while(li.hasNext()){
-                System.out.println(li.next().getEndDate());
+                System.out.println(li.next().getStartDate());
             }
             //session.getTransaction().commit();
 
@@ -353,14 +352,7 @@ while(li.hasNext()){
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            //Query query = session.createQuery("from course_session where idSession=1 ");
-            //  Query query = session.createQuery("insert into Course(title) values ('programmation Java') ");
 
-            //List<CourseSession> CourseSessionList = query.list();
-            //ListIterator<CourseSession> li = CourseSessionList.listIterator();
-           // while (li.hasNext()){
-             //   System.out.println(li.next().getId().getCity());
-           // }
             java.sql.Date date_str = null;
             java.sql.Date date_end = null;
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -381,32 +373,15 @@ while(li.hasNext()){
             //Date date2 = new Date(millis);
             session.beginTransaction();
             Course co = new Course("4","BASE DE DONNES");
-
+Location lc = new Location(1,"MARSEILLE");
             Location location1 = (Location) session.get(Location.class,1);
             CourseSession courseSession2= (CourseSession) session.get(CourseSession.class,2);
             Course course1= (Course) session.get(Course.class,"4");
             CourseSession cs = new CourseSession(8,date_str,date_end,25,location1, course1);
-            Client client= new Client(2, "Loick", "TSOBGNI","3 rue gaston deferre",07,"benito.tsobgni@yahoo.fr",courseSession2);
-          //  CourseSession courseSession1= new CourseSession (3,date,date,5,location1,course1);
-            //Course Course1 = new Course("3","ANGLAIS");
-            //Course1.setTitle("Programmation JAVA");
-            //CourseSession courseSession1 = new CourseSession(1,"20/11/2017", "22/11/2017",14);
-            // CourseSession courseSession1 = new CourseSession();
-            // courseSession1.setId(1);
+           // Client client= new Client(2, "Loick", "TSOBGNI","3 rue gaston deferre",07,"benito.tsobgni@yahoo.fr",courseSession2);
 
 
-
-
-            //System.out.println(formater.format(aujourdhui));
-
-            // courseSession1.setStartDate(date1);
-            // courseSession1.setEndDate(date2);
-            // courseSession1.setMax(13);
-            // courseSession1.setId(1);
-            // courseSession1.setCode("1");
-
-
-            session.persist(cs);
+            session.persist(lc);
             //CourseSession courseSession = (CourseSession) session.get(CourseSession.class, 1);
             session.getTransaction().commit();
             // System.out.println(location1.getCity());
@@ -428,6 +403,39 @@ while(li.hasNext()){
 				...
     }
 */
+    }
+
+
+    public Long userSession(Integer sessionId){
+        Long count= null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("select count(e) from client e where e.idSession.idSession= :idSession   ");
+            query.setParameter("idSession",sessionId);
+            count =  (Long)query.uniqueResult();
+            System.out.println(count);
+
+            //session.getTransaction().commit();
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if (session.getTransaction() != null) {
+                try {
+                    session.getTransaction().rollback();
+                } catch (HibernateException he2) {
+                    he2.printStackTrace();
+                }
+            }
+        }
+
+  /*      finally {
+            if(session != null) {
+                try { session.close();
+
+				...
+    }
+*/
+        return count;
     }
 
 }

@@ -13,18 +13,13 @@ public class ServletHome extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse
             response ) throws ServletException, IOException {
-        // request.setAttribute( "test", message );
-      //  request.setAttribute( "list", result );
         this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/home.jsp"
         ).forward( request, response );
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse
             response ) throws ServletException, IOException {
-        // request.setAttribute( "test", message );
-        //  request.setAttribute( "list", result );
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/pages/home.jsp"
-        ).forward( request, response );
+
     }
 }
 

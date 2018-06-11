@@ -1,8 +1,8 @@
-package test.fr.utbm.lo54.repository; 
+package test.fr.utbm.lo54.repository;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /** 
 * LocationDao Tester. 
@@ -37,8 +37,8 @@ public void testGetAllLocations() throws Exception {
 * 
 */ 
 @Test
-public void testGetLocation() throws Exception { 
-//TODO: Test goes here... 
+public void testGetLocation() throws Exception {
+//TODO: Test goes here...
 } 
 
 /** 
@@ -47,8 +47,8 @@ public void testGetLocation() throws Exception {
 * 
 */ 
 @Test
-public void testSave() throws Exception { 
-//TODO: Test goes here... 
+public void testSave() throws Exception {
+//TODO: Test goes here...
 } 
 
 

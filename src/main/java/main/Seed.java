@@ -22,7 +22,7 @@ public class Seed {
 
     public static void main(String[] args) {
 //        addLocation();
-        addClient();
+//        addClient();
 //        addCourse();
 //        addCourseSession();
     }

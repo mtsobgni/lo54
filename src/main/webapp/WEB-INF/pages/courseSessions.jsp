@@ -66,7 +66,23 @@
                         <%= courseSession.getMax() %>
                         </td>
                         <td>
-                            <a href="registration?idSession=<%= courseSession.getIdSession() %>">S'inscrire</a>
+                            <%
+                                if (clientService.getNumClient(courseSession.getIdSession())<courseSession.getMax()) {
+                            %>
+                                <a href="registration?idSession=<%= courseSession.getIdSession() %>">
+                                    S'inscrire
+                                </a>
+                            <%
+                                } else {
+                            %>
+                                <a href="registration?idSession=<%= courseSession.getIdSession() %>"
+                                   style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                   onclick="return false">
+                                    S'inscrire
+                                </a>
+                            <%
+                                }
+                            %>
                         </td>
                     </tr>
                     <%}%>

@@ -14,11 +14,11 @@ public class RegistrationServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ClientService clientService = new ClientService();
         clientService.registerClient(request.getParameter("firstname"),
-                                        request.getParameter("lastname"),
-                                        request.getParameter("address"),
-                                        request.getParameter("phone"),
-                                        request.getParameter("email"),
-                                        Integer.parseInt(request.getParameter("idSession")));
+                request.getParameter("lastname"),
+                request.getParameter("address"),
+                request.getParameter("phone"),
+                request.getParameter("email"),
+                Integer.parseInt(request.getParameter("idSession")));
         this.getServletContext().getRequestDispatcher("/courses").forward(request, response);
     }
 

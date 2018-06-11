@@ -7,6 +7,37 @@
 <html lang="en" class="position-relative"  style="min-height: 100%">
 <head>
     <jsp:include page="head.jsp"/>
+    <script>
+        function validateForm() {
+            var firstname = document.forms["myForm"]["firstname"].value;
+            if (firstname == "") {
+                alert("Prénom invalide");
+                return false;
+            }
+            var lastname = document.forms["myForm"]["lastname"].value;
+            if (lastname == "") {
+                alert("Nom invalide");
+                return false;
+            }
+            var address = document.forms["myForm"]["address"].value;
+            if (address == "") {
+                alert("Adresse invalide");
+                return false;
+            }
+            var phone = document.forms["myForm"]["phone"].value;
+            if (phone == "") {
+                alert("Phone invalide");
+                return false;
+            }
+            var email = document.forms["myForm"]["email"].value;
+            if (email == "") {
+                alert("Email invalide");
+                return false;
+            }
+
+            alter("Votre inscription a été bien enregistré");
+        }
+    </script>
     <title> Inscription </title>
 </head>
 <body>
@@ -24,7 +55,7 @@
             <p><%= Helper.formatFrenchDate(courseSession.getStartDate()) %> - <%= Helper.formatFrenchDate(courseSession.getEndDate()) %></p>
             <p>à <%= courseSession.getId().getCity() %></p>
         </div>
-        <form method="post" action="registration">
+        <form name="myForm" method="post" action="registration" onsubmit="return validateForm()">
             <input type="hidden" name="idSession" value=<%= request.getParameter("idSession") %>>
             <label for="firstname"> Prénom </label>
             <input type="text" name="firstname" id="firstname" class="form-control">

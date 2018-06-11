@@ -16,15 +16,19 @@ public class App1 {
 
     public static void main(String[] args) throws ParseException {
 //.parse(date).getTime());
+        boolean exe;
         List<CourseSession> list;
         HibernateDao test = new HibernateDao();
+        HibernateDaoCreate hbCreate= new HibernateDaoCreate();
         ListeFormation tt= new ListeFormation();
         // list=tt.listeSession("1");
         long millis=System.currentTimeMillis();
         java.util.Date date1 = new Date(millis);
         String date="2011-05-01";
         //test.doSomethingdo();
-        test.filtreCourse("%","%");
+
+      // hbCreate.CreateClient(1,"t","p","h","p","ml");
+       test.filtreCourse("%","%");
 
     }
 }

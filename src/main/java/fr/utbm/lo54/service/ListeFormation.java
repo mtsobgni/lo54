@@ -67,8 +67,8 @@ public class ListeFormation {
     public List<Object []>filtreFormationDate(String code, String lieu, String date){
 
         List<Object []> result=null;
-        code="%" + code+ "%";
-        lieu="%" + lieu + "%";
+     //   code="%" + code+ "%";
+     //   lieu="%" + lieu + "%";
 
         if(date.isEmpty()){
             result=hb1.filtreCourse(code, lieu);

@@ -57,6 +57,8 @@ while(li.hasNext()){
     }
 
     public  List<Object []> filtreCourse(String keyword, String lieu) {
+        lieu="%"+lieu+"%";
+        keyword= "%"+keyword+"%";
         List<Object[]> CourseSessions=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -64,12 +66,12 @@ while(li.hasNext()){
             query.setParameter("title",keyword);
             query.setParameter("city",lieu);
              CourseSessions= (List<Object[]>)query.list();
-          /*  for (Object[] CourseSession: CourseSessions){
+           for (Object[] CourseSession: CourseSessions){
                 String code= (String)CourseSession[0];
                 System.out.println(code);
                 String name = (String)CourseSession[1];
                 System.out.println(name);
-            }*/
+            }
             //session.getTransaction().commit();
 
 
@@ -95,6 +97,8 @@ while(li.hasNext()){
     }
 
     public  List<Object []> filtreCourseDate(String keyword, String lieu, String date) throws ParseException {
+        lieu="%"+lieu+"%";
+        keyword= "%"+keyword+"%";
         List<Object[]> CourseSessions=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         long millis=System.currentTimeMillis();
@@ -436,6 +440,43 @@ Location lc = new Location(1,"MARSEILLE");
     }
 */
         return count;
+    }
+
+    public  List<CourseSession> listClient() {
+        List<CourseSession> ClientList=null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("from course_session ");
+
+            ClientList = query.list();
+            ListIterator<CourseSession> li = ClientList.listIterator();
+
+
+            while(li.hasNext()){
+                System.out.println(li.next().getIdSession());
+            }
+            //session.getTransaction().commit();
+
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if (session.getTransaction() != null) {
+                try {
+                    session.getTransaction().rollback();
+                } catch (HibernateException he2) {
+                    he2.printStackTrace();
+                }
+            }
+        }
+
+  /*      finally {
+            if(session != null) {
+                try { session.close();
+
+				...
+    }
+*/
+        return ClientList;
     }
 
 }

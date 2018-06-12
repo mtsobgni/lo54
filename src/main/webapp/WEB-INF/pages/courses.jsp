@@ -1,10 +1,13 @@
-<%@ page import="fr.utbm.lo54.entity.Course" %>
-<%@ page import="fr.utbm.lo54.entity.Location" %>
-<%@ page import="fr.utbm.lo54.service.CourseService" %>
-<%@ page import="fr.utbm.lo54.service.LocationService" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ListIterator" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+Created by IntelliJ IDEA.
+User: Bike
+Date: 02/05/2018
+Time: 10:26
+To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 
 <html lang="en" class="position-relative" style="min-height: 100%">
 <head>
@@ -13,20 +16,21 @@
 </head>
 <body class="mb-5">
 <jsp:include page="header.jsp"/>
-
 <main role="main" style="margin-bottom: 150px;">
     <section class="text-center bg-white mt-5">
         <div class="container">
-            <% String keyword = (String) request.getAttribute("keyword");%>
             <div class="row mb-5">
                 <form method="POST" action="courses" class="w-100">
                     <div class="form-group row">
                         <div class="col-md-12 mb-3">
-                            <% if (keyword == null) { %>
-                            <input id="s" type="text" placeholder="Recherche..." name="keyWord" class="form-control">
-                            <%} else { %>
-                            <input id="s" value="<%=request.getAttribute("keyword")%>" type="text" placeholder="Recherche..." name="keyWord" class="form-control">
-                            <% } %>
+                            <c:choose>
+                                <c:when test="${ empty keyword }">
+                                    <input id="s" type="text" placeholder="Recherche..." name="keyWord" class="form-control">
+                                </c:when>
+                                <c:otherwise>
+                                    <input id="s" value="${keyword}" type="text" placeholder="Recherche..." name="keyWord" class="form-control">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -34,20 +38,12 @@
                             <input type="date" name="date" class="form-control">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <select name="location" class="form-control">
-                                <option value="">Lieu</option>
-                                <%
-                                    List<Location> listLocation;
-                                    listLocation = (List<Location>) request.getAttribute("listLocation");
-                                    ListIterator<Location> itrLocation = listLocation.listIterator();
-                                    while (itrLocation.hasNext()) {
-                                        Location location = itrLocation.next();
-                                %>
-                                <option value= <%= location.getId() %>>
-                                    <%= location.getCity()%>
-                                </option>
-                                <%}%>
-                            </select>
+                             <select name="location" class="form-control">
+                                  <option value="">Lieu</option>
+                                  <c:forEach items="${ listLocation }" var="listLocation" varStatus="status">
+                                   <option value="${listLocation.id}"> ${ listLocation.city }</option>
+                                 </c:forEach>
+                        </select>
                         </div>
                     </div>
                     <button type="submit" id="rec" class="btn btn-primary btn-lg btn-block">
@@ -55,44 +51,34 @@
                     </button>
                 </form>
             </div>
-            <%
-                List<Course> listCourse = (List<Course>) request.getAttribute("listCourse");
-
-                if (listCourse == null || listCourse.isEmpty()) {
-                } else {
-            %>
-            <h3 class="mb-4"> Nos Formations</h3>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
+            <c:choose>
+            <c:when test="${ empty listCourse }">
+            </c:when>
+            <c:otherwise>
+                <h3 class="mb-4"> Nos Formations</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
                         <tr>
                             <th>Code</th>
                             <th>Intitulé de la formation</th>
                             <th>S'inscrire</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            ListIterator<Course> itrCourse = listCourse.listIterator();
-                            while (itrCourse.hasNext()) {
-                                Course course = itrCourse.next();
-                        %>
-                        <tr>
-                            <td>
-                                <%= course.getCode() %>
-                            </td>
-                            <td>
-                                <%= course.getTitle() %>
-                            </td>
-                            <td>
-                                <a href="courseSessions?code=<%= course.getCode() %>">S'inscrire</a>
-                            </td>
-                        </tr>
-                        <%}%>
-                    </tbody>
-                </table>
-            </div>
-            <% }%>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${ listCourse }" var="course" varStatus="status">
+                            <tr>
+                                <td><c:out value="${ course.code }" /></td>
+                                <td><c:out value="${ course.title }" /></td>
+
+                                <td><a href="courseSessions?code=${course.code}">S'inscrire</a></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:otherwise>
+        </c:choose>
         </div>
     </section>
 </main>

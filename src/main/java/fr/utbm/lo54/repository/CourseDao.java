@@ -79,7 +79,7 @@ public class CourseDao {
     }
 
     // generate the query by keyword locationId and date
-    private String generateFilterQuery(String keyWord, String locationId, String date) {
+    public String generateFilterQuery(String keyWord, String locationId, String date) {
         String queryVar = "select distinct(c) from course_session cs, course c, location l where cs.code = c.code and cs.id = l.id";
         if (keyWord != null && !keyWord.isEmpty()) {
             queryVar += " and lower(c.title) like lower(:keyWord)";

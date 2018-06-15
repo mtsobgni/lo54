@@ -50,30 +50,29 @@ public class CourseSessionDaoTest {
     @Test
     public void getCourseSessionsByCodeTest() throws Exception {
 
-        String code= "1";
+        String code = "1";
         List<CourseSession> listExpect;
-        int expected ;
+        int expected;
 
-       CourseSessionDao courseSessionDao = new CourseSessionDao();
-       listExpect=courseSessionDao.getCourseSessionsByCode(code);
-       expected=listExpect.get(0).getIdSession();
+        CourseSessionDao courseSessionDao = new CourseSessionDao();
+        listExpect = courseSessionDao.getCourseSessionsByCode(code);
+        expected = listExpect.get(0).getIdSession();
         Assert.assertEquals(expected, (1));
 
 
     }
 
 
-
     @Test
     public void returnsNullWhenCourseSessionCannotBeFoundByCodeTest() throws Exception {
 
-        String code= "4857";
+        String code = "4857";
         List<CourseSession> listExpect;
-        int expected ;
-        ArrayList<CourseSession> actualListCourseSession= new ArrayList<CourseSession>();
+        int expected;
+        ArrayList<CourseSession> actualListCourseSession = new ArrayList<CourseSession>();
 
         CourseSessionDao courseSessionDao = new CourseSessionDao();
-        listExpect=courseSessionDao.getCourseSessionsByCode(code);
+        listExpect = courseSessionDao.getCourseSessionsByCode(code);
         Assert.assertEquals(listExpect, actualListCourseSession);
 
 
@@ -82,17 +81,17 @@ public class CourseSessionDaoTest {
     @Test
     public void getCourseSessionByIdTest() throws Exception {
 
-        int idSession= 1;
+        int idSession = 1;
         CourseSession expectSession;
-        int expectedIdSession ;
-        String expectedIdCourse ;
-        int expectedIdLocation ;
+        int expectedIdSession;
+        String expectedIdCourse;
+        int expectedIdLocation;
 
         CourseSessionDao courseSessionDao = new CourseSessionDao();
-        expectSession=courseSessionDao.getCourseSession(idSession);
-        expectedIdSession=expectSession.getIdSession();
-        expectedIdCourse=expectSession.getCode().getCode();
-        expectedIdLocation=expectSession.getId().getId();
+        expectSession = courseSessionDao.getCourseSession(idSession);
+        expectedIdSession = expectSession.getIdSession();
+        expectedIdCourse = expectSession.getCode().getCode();
+        expectedIdLocation = expectSession.getId().getId();
         Assert.assertEquals(expectedIdSession, (1));
         Assert.assertEquals(expectedIdCourse, "1");
         Assert.assertEquals(expectedIdLocation, (1));

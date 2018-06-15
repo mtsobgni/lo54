@@ -14,6 +14,14 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CourseSessionServlet</servlet-name>
+        <servlet-class>fr.utbm.lo54.servlet.CourseSessionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseSessionServlet</servlet-name>
+        <url-pattern>/courseSessions</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>RegistrationServlet</servlet-name>

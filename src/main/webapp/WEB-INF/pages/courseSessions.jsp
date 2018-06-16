@@ -1,11 +1,11 @@
 <%@ page import="fr.utbm.lo54.entity.Course" %>
 <%@ page import="fr.utbm.lo54.entity.CourseSession" %>
-<%@ page import="fr.utbm.lo54.repository.CourseDao" %>
 <%@ page import="fr.utbm.lo54.service.ClientService" %>
 <%@ page import="fr.utbm.lo54.service.LocationService" %>
 <%@ page import="fr.utbm.lo54.tools.Helper" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ListIterator" %>
+<%@ page import="fr.utbm.lo54.service.CourseService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en" class="position-relative" style="min-height: 100%">
@@ -21,8 +21,8 @@
         <div class="container">
             <div class="mt-5 mb-5">
                 <%
-                    CourseDao courseDao = new CourseDao();
-                    Course course = courseDao.getCourse(request.getParameter("code"));
+                    CourseService courseService = new CourseService();
+                    Course course = courseService.getCourse(request.getParameter("code"));
                 %>
                 <h3 class="font-weight-bold"><%= course.getCode() %> - <%= course.getTitle() %></h3>
             </div>
